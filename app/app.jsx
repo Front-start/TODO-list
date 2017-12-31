@@ -22,7 +22,16 @@ ReactDOM.render(
         <Route path="/TODO-list/" component={ItemList} />
         <Route strict path="/TODO-list" component={ItemList} />
         <Route path="/TODO-list" component={ItemList} />
-        
+
+        <Route exact path="TODO-list/" component={ItemList} />
+        <Route path="TODO-list/" component={ItemList} />
+        <Route exact path="TODO-list" component={ItemList} />
+        <Route path="TODO-list" component={ItemList} />
+        <Route strict path="TODO-list/" component={ItemList} />
+        <Route path="TODO-list/" component={ItemList} />
+        <Route strict path="TODO-list" component={ItemList} />
+        <Route path="TODO-list" component={ItemList} />
+
         <Route exact path="/" component={ItemList} />
         <Route path="/item" component={Item} />
         <Route component={NotFound} />
