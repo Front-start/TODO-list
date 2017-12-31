@@ -1,0 +1,44 @@
+{
+  "name": "TODO list",
+  "description": "Первое приложение на реакте",
+  "version": "1.0.0",
+  "author": "Antoshko",
+  "scripts": {
+    "dev": "webpack-dev-server --hot --open",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-router-dom": "^4.2.2"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.2.3",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.16.0",
+    "copy-webpack-plugin": "^4.3.1",
+    "css-loader": "^0.28.7",
+    "css-mqpacker": "^6.0.1",
+    "cssnano": "^3.10.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "imagemin-webpack-plugin": "^1.5.2",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "postcss": "^6.0.14",
+    "postcss-font-magician": "^2.1.0",
+    "postcss-loader": "^2.0.9",
+    "postcss-sorting": "^3.1.0",
+    "style-loader": "^0.19.1",
+    "stylefmt": "^6.0.0",
+    "uglifyjs-webpack-plugin": "^1.1.5",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.9.1"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "IE 10"
+  ]
+}
