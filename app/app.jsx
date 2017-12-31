@@ -1,16 +1,24 @@
 import ReactDOM from "react-dom";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import ItemsList from "./components/ItemsList.jsx";
+
+import Nav from "./components/Nav.jsx";
+import ItemList from "./components/ItemList.jsx";
+import Item from "./components/Item.jsx";
+import NotFound from "./components/NotFound.jsx";
 
 import style from "./styles/style.less";
 
-const asd = `asdfsfda`;
-
 ReactDOM.render(
-  <div>
-    <ItemsList />
-    <img src="./images/u4.jpg" />
-  </div>,
+  <Router>
+    <div>
+      <Nav />
+      <Switch>
+        <Route exact path="/" component={ItemList} />
+        <Route exact path="/item" component={Item} />
+        <Route component={NotFound} />
+      </Switch>
+    </div>
+  </Router>,
   document.getElementById("app")
 );

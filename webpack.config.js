@@ -12,6 +12,7 @@ module.exports = {
     publicPath: "/public/",
     filename: "bundle.js" // название создаваемого файла
   },
+  devServer: { historyApiFallback: true },
   module: {
     rules: [
       {
@@ -61,7 +62,7 @@ module.exports = {
         to: "../images/"
       }
     ]),
-    new ImageminPlugin({ test: /\.(jpe?g|png|gif|svg)$/i }),
-    new UglifyJsPlugin()
+    new ImageminPlugin({ test: /\.(jpe?g|png|gif|svg)$/i }) //,
+    // new UglifyJsPlugin()
   ]
 };
