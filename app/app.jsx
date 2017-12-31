@@ -14,6 +14,7 @@ ReactDOM.render(
     <div>
       <Nav />
       <Switch>
+        <Redirect from="/TODO-list/" to="/" />
         <Route exact path="/" component={ItemList} />
         <Route path="/item" component={Item} />
         <Route component={NotFound} />
