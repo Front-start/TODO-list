@@ -2423,7 +2423,7 @@ _reactDom2.default.render(_react2.default.createElement(
       _reactRouterDom.Switch,
       null,
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/", component: _ItemList2.default }),
-      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/item", component: _Item2.default }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: "/item", component: _Item2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { component: _NotFound2.default })
     )
   )
