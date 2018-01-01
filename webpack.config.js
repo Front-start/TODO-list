@@ -6,11 +6,11 @@ var CopyWebpackPlugin = require("copy-webpack-plugin");
 var UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
-  entry: "./app/app.jsx", // входная точка - исходный файл
+  entry: "./app/app.jsx",
   output: {
-    path: path.resolve(__dirname, "./public"), // путь к каталогу выходных файлов - папка public
+    path: path.resolve(__dirname, "./public"),
     publicPath: "/public/",
-    filename: "bundle.js" // название создаваемого файла
+    filename: "bundle.js"
   },
   devServer: { historyApiFallback: true },
   module: {
@@ -62,7 +62,9 @@ module.exports = {
         to: "../images/"
       }
     ]),
-    new ImageminPlugin({ test: /\.(jpe?g|png|gif|svg)$/i }) //,
-    // new UglifyJsPlugin()
+    new ImageminPlugin({
+      test: /\.(jpe?g|png|gif|svg)$/i
+    }) /*,
+    new UglifyJsPlugin()*/
   ]
 };

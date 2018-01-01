@@ -1,46 +1,10 @@
-h2 {
-  font-size: 20px;
-  color: red;
+div {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-:-webkit-full-screen a {
-  display: -webkit-box;
-  display: flex;
-}
-
-:-moz-full-screen a {
-  display: flex;
-}
-
-:-ms-fullscreen a {
-  display: -ms-flexbox;
-  display: flex;
-}
-
-:fullscreen a {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-a {
-  font-size: 20px;
-  font-weight: normal;
-  font-style: italic;
-  margin: 10px;
-  padding: 20px;
-}
-
-.bar {
-  width: 160px;
-}
-
-@media screen and (min-width: 768px) {
-  .foo {
-    width: 576px;
-  }
-
-  .bar {
-    width: 384px;
-  }
+.item {
+  display: inline-block;
+  width: 50%;
+  border: 1px seagreen solid;
 }

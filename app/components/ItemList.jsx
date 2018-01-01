@@ -1,5 +1,6 @@
 import React from "react";
-import { items as itemsFromStorage } from "./storage.js";
+import { ItemsStorage } from "./storage.js";
+import { SortArray } from "./SortArray.js";
 
 class ItemList extends React.Component {
   constructor(props) {
@@ -8,20 +9,22 @@ class ItemList extends React.Component {
     this.updateSortingField = this.updateSortingField.bind(this);
     this.updateSortingOrder = this.updateSortingOrder.bind(this);
 
-    this.state = { items: itemsFromStorage, order: "desc", fieldToSort: "id" };
+    this.state = {
+      items: ItemsStorage.items,
+      order: "desc",
+      fieldToSort: "id"
+    };
   }
 
   sort() {
-    let order = this.state.order;
-    let field = this.state.fieldToSort;
-    console.log(order, field);
-    function compareByField(a, b) {
-      return order == "asc" ? a[field] - b[field] : b[field] - a[field];
-    }
+    SortArray.sort(
+      ItemsStorage.items,
+      this.state.fieldToSort,
+      ItemsStorage.fields[this.state.fieldToSort].type,
+      this.state.order
+    );
 
-    itemsFromStorage.sort(compareByField);
-
-    this.setState({ items: itemsFromStorage });
+    this.setState({ items: ItemsStorage.items });
   }
 
   updateSortingField(e) {
@@ -38,9 +41,13 @@ class ItemList extends React.Component {
           <h1 style={{ color: "red" }}>ItemList</h1>
         </div>
         <select onChange={this.updateSortingField}>
-          <option value="id">id</option>
-          <option value="date">date</option>
-          <option value="name">name</option>
+          {Object.keys(ItemsStorage.fields).map(function(key) {
+            return (
+              <option key={key} value={key}>
+                {ItemsStorage.fields[key].name}
+              </option>
+            );
+          })}
         </select>
         <input
           type="button"
@@ -48,16 +55,33 @@ class ItemList extends React.Component {
           ref="order"
           onClick={this.updateSortingOrder}
         />
-        <ul>
+        <div className="item-list">
           {this.state.items.map(function(item) {
             return (
-              <li key={item.id}>
-                {item.id} - {new Date(item.date).toString()} - {item.name} -{" "}
-                {item.content}
-              </li>
+              <div key={item.id} className="item">
+                <ul>
+                  <li>
+                    {ItemsStorage.fields.id.name} {item.id}
+                  </li>
+                  <li>
+                    {ItemsStorage.fields.date.name}{" "}
+                    {new Date(item.date).toString()}
+                  </li>
+                  <li>
+                    {ItemsStorage.fields.date2.name}{" "}
+                    {new Date(item.date2).toString()}
+                  </li>
+                  <li>
+                    {ItemsStorage.fields.name.name} {item.name}
+                  </li>
+                  <li>
+                    {ItemsStorage.fields.content.name} {item.content}
+                  </li>
+                </ul>
+              </div>
             );
           })}
-        </ul>
+        </div>
         <input type="button" value="Отсортировать" onClick={this.sort} />
       </div>
     );
