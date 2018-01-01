@@ -16,7 +16,7 @@ ReactDOM.render(
       <Nav />
       <Switch>
         <Route exact path="/" component={Main} />
-        <Route path="/item" component={Item} />
+        <Route path="/item/:id" component={Item} />
         <Route component={NotFound} />
       </Switch>
     </div>

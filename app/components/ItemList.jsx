@@ -1,6 +1,8 @@
 import React from "react";
+import { Link, BrowserRouter } from "react-router-dom";
 import { ItemsStorage } from "./storage.js";
 import { SortArray } from "./SortArray.js";
+import ItemRender from "./ItemRender.jsx";
 
 class ItemList extends React.Component {
   constructor(props) {
@@ -14,6 +16,10 @@ class ItemList extends React.Component {
       order: "desc",
       fieldToSort: "id"
     };
+  }
+
+  componentWillMount() {
+    this.sort();
   }
 
   sort() {
@@ -59,25 +65,8 @@ class ItemList extends React.Component {
           {this.state.items.map(function(item) {
             return (
               <div key={item.id} className="item">
-                <ul>
-                  <li>
-                    {ItemsStorage.fields.id.name} {item.id}
-                  </li>
-                  <li>
-                    {ItemsStorage.fields.date.name}{" "}
-                    {new Date(item.date).toString()}
-                  </li>
-                  <li>
-                    {ItemsStorage.fields.date2.name}{" "}
-                    {new Date(item.date2).toString()}
-                  </li>
-                  <li>
-                    {ItemsStorage.fields.name.name} {item.name}
-                  </li>
-                  <li>
-                    {ItemsStorage.fields.content.name} {item.content}
-                  </li>
-                </ul>
+                <ItemRender item={item} fields={ItemsStorage.fields} />
+                <Link to={`/item/${item.id}`}>Открыть запись</Link>
               </div>
             );
           })}

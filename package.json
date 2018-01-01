@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "author": "Antoshko",
   "scripts": {
-    "dev": "webpack-dev-server --hot --open",
-    "build": "webpack"
+    "dev": "webpack-dev-server --hot --open --config webpack.dev-config.js",
+    "build": "webpack --config webpack.config.js"
   },
   "dependencies": {
     "react": "^16.0.0",

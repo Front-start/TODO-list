@@ -3,3 +3,4 @@ app/
 package.json
 postcss.config.js
 webpack.config.js
+webpack.dev-config.js

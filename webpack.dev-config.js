@@ -1,9 +1,6 @@
 var path = require("path");
 
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var ImageminPlugin = require("imagemin-webpack-plugin").default;
-var CopyWebpackPlugin = require("copy-webpack-plugin");
-var UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
   entry: "./app/app.jsx",
@@ -21,17 +18,7 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: [
-              [
-                "env",
-                {
-                  targets: {
-                    browsers: ["> 1%", "last 2 versions", "IE 10"]
-                  }
-                }
-              ],
-              "react"
-            ]
+            presets: ["env", "react"]
           }
         }
       },
@@ -54,17 +41,5 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new ExtractTextPlugin("./styles.css"),
-    new CopyWebpackPlugin([
-      {
-        from: "./images/",
-        to: "../images/"
-      }
-    ]),
-    new ImageminPlugin({
-      test: /\.(jpe?g|png|gif|svg)$/i
-    }),
-    new UglifyJsPlugin()
-  ]
+  plugins: [new ExtractTextPlugin("./styles.css")]
 };
