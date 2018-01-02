@@ -9,6 +9,7 @@ export let ItemsStorage = {
   items: [
     {
       id: 1,
+      state: 60,
       name: "[HMR] Cannot apply update. Need to do a full reload!",
       date: 1514704590000,
       date2: 151484590000,
@@ -17,6 +18,7 @@ export let ItemsStorage = {
     },
     {
       id: 25,
+      state: 80,
       name: "Табурет-стремянка М91.13",
       date: 1511704590000,
       date2: 151384590000,
@@ -25,6 +27,7 @@ export let ItemsStorage = {
     },
     {
       id: 2,
+      state: 50,
       name: "[WDS] Disconnected!",
       date: 1514704890000,
       date2: 1516704890000,
@@ -33,6 +36,7 @@ export let ItemsStorage = {
     },
     {
       id: 3,
+      state: 10,
       name:
         "Здесь определен компонент ClickButton, который по сути представляет кнопку",
       date: 1514706590000,
@@ -42,6 +46,7 @@ export let ItemsStorage = {
     },
     {
       id: 4,
+      state: 70,
       name:
         "Для начала, давайте рассмотрим, как преобразовать списки в JavaScript",
       date: 1514714590000,
@@ -51,6 +56,7 @@ export let ItemsStorage = {
     },
     {
       id: 5,
+      state: 100,
       name: "Запотеть катку",
       date: 1514703590000,
       date2: 1514743590000,
@@ -59,3 +65,7 @@ export let ItemsStorage = {
     }
   ]
 };
+
+ItemsStorage.items.forEach(function(item) {
+  Object.defineProperty(item, "state", { enumerable: false });
+});

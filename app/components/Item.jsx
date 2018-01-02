@@ -37,7 +37,6 @@ class Item extends React.Component {
             item={ItemsStorage.items[itemId]}
             fields={ItemsStorage.fields}
           />
-          ,
           <Link to={`/`}>Вернуться к списку</Link>
         </div>
       );
