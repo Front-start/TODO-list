@@ -12,7 +12,7 @@ class Header extends React.Component {
   }
 
   componentWillMount() {
-    localStorage.setItem("PreviousSessionTime", new Date());
+    localStorage.setItem("PreviousSessionTime", Date.now());
   }
 
   render() {
@@ -26,7 +26,7 @@ class Header extends React.Component {
             {"Предыдущее посещение: "}
 
             {this.state.PreviousSessionTime
-              ? moment(this.state.PreviousSessionTime).from(new Date())
+              ? moment(this.state.PreviousSessionTime).from(Date.now())
               : "Вы пришли в первый раз!"}
           </span>
         </div>
