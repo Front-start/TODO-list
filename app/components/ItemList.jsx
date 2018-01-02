@@ -62,14 +62,12 @@ class ItemList extends React.Component {
           onClick={this.updateSortingOrder}
         />
         <div className="item-list">
-          {this.state.items.map(function(item) {
-            return (
-              <div key={item.id} className="item">
-                <ItemRender item={item} fields={ItemsStorage.fields} />
-                <Link to={`/item/${item.id}`}>Открыть запись</Link>
-              </div>
-            );
-          })}
+          {this.state.items.map(item => (
+            <div key={item.id} className="item">
+              <ItemRender item={item} fields={ItemsStorage.fields} />
+              <Link to={`/item/${item.id}`}>Открыть запись</Link>
+            </div>
+          ))}
         </div>
         <input type="button" value="Отсортировать" onClick={this.sort} />
       </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, BrowserRouter } from "react-router-dom";
 import moment from "moment";
-moment.locale('ru');
+moment.locale("ru");
 
 class ItemRender extends React.Component {
   constructor(props) {
@@ -16,24 +16,25 @@ class ItemRender extends React.Component {
     return ["hsl(", hue, ",100%,50%)"].join("");
   }
   render() {
-    let fields = this.props.fields;
-    let item = this.props.item;
     return (
       <div key={this.props.item.id} className="itemSingle">
         <div>
-          Готовность: <span style={{ color: this.state.color }}>{this.props.item.state}%</span>
+          {"Готовность: "}
+          <span style={{ color: this.state.color }}>
+            {this.props.item.state}%
+          </span>
         </div>
-        <div>
-          До дедлайна: {moment().to(item.date2)}
-        </div>
+        <div>До дедлайна: {moment().to(this.props.item.date2)}</div>
         <ul>
-          {Object.keys(item).map(function(key) {
-            return (
-              <li key={key}>
-                {fields[key].name} - {fields[key].type == "date" ? moment(item[key]).format('DD MMMM YYYY[,] HH:MM') : item[key]}
-              </li>
-            );
-          })}
+          {Object.keys(this.props.item).map(key => (
+            <li key={key}>
+              {this.props.fields[key].name}
+              {" - "}
+              {this.props.fields[key].type == "date"
+                ? moment(this.props.item[key]).format("DD MMMM YYYY[,] HH:MM")
+                : this.props.item[key]}
+            </li>
+          ))}
         </ul>
       </div>
     );
