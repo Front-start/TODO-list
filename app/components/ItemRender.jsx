@@ -24,7 +24,7 @@ class ItemRender extends React.Component {
             {this.props.item.state}%
           </span>
         </div>
-        <div>До дедлайна: {moment().to(this.props.item.date2)}</div>
+        <div>Дедлайн: {moment().to(this.props.item.date2)}</div>
         <ul>
           {Object.keys(this.props.item).map(key => (
             <li key={key}>

@@ -20,7 +20,6 @@ class Item extends React.Component {
       ItemsStorage.items,
       this.props.match.params.id
     );
-    console.log(itemId);
 
     if (itemId == undefined) {
       return (
