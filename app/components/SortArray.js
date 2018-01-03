@@ -1,7 +1,11 @@
 export let SortArray = {
   sort(array, field, type, order) {
     function compare(a, b) {
-      if (type == "date" || type == "number") {
+      if (type == "date") {
+        return order == "asc"
+          ? Date.parse(a[field]) - Date.parse(b[field])
+          : Date.parse(b[field]) - Date.parse(a[field]);
+      } else if (type == "number") {
         return order == "asc" ? a[field] - b[field] : b[field] - a[field];
       } else if (type == "string") {
         return order == "asc"
