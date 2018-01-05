@@ -9,7 +9,7 @@ class Header extends React.Component {
     this.updateInfo = this.updateInfo.bind(this);
 
     this.state = {
-      PreviousSessionTime: "Вы зашли впервые!",
+      PreviousSessionTime: null,
       Location: "Не удалось определить :("
     };
   }
