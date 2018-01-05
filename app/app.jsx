@@ -3,6 +3,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import moment from "moment";
 moment.locale("ru");
+import ymaps from "ymaps";
 
 import Header from "./components/Header.jsx";
 import Nav from "./components/Nav.jsx";
@@ -12,8 +13,8 @@ import NotFound from "./components/NotFound.jsx";
 
 import style from "./styles/style.less";
 
-ymaps.ready(() => {
-  ymaps.geolocation.get().then(result => {
+ymaps.load("https://api-maps.yandex.ru/2.1/?lang=ru_RU").then(maps => {
+  maps.geolocation.get().then(result => {
     let location = {
       coordinates: result.geoObjects.get(0).geometry.getCoordinates(),
       name: result.geoObjects.get(0).properties.get("text")

@@ -35,7 +35,8 @@
     "stylefmt": "^6.0.0",
     "uglifyjs-webpack-plugin": "^1.1.5",
     "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.9.1"
+    "webpack-dev-server": "^2.9.1",
+    "ymaps": "^0.1.1"
   },
   "browserslist": [
     "> 1%",

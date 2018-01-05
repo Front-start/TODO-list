@@ -3,6 +3,7 @@ import { Link, BrowserRouter } from "react-router-dom";
 import { ItemsStorage } from "./storage.js";
 import ItemRender from "./ItemRender.jsx";
 import ItemMap from "./ItemMap.jsx";
+import ymaps from "ymaps";
 
 class Item extends React.Component {
   constructor(props) {
@@ -26,10 +27,10 @@ class Item extends React.Component {
     }
   }
   getDistance() {
-    ymaps.ready(() => {
+    ymaps.load("https://api-maps.yandex.ru/2.1/?lang=ru_RU").then(maps => {
       this.setState({
         distance: Math.floor(
-          ymaps.coordSystem.geo.getDistance(
+          maps.coordSystem.geo.getDistance(
             this.state.coordinates1,
             this.state.coordinates2
           ) / 1000

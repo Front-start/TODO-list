@@ -1,4 +1,5 @@
 import React from "react";
+import ymaps from "ymaps";
 
 class YouAreHere extends React.Component {
   constructor(props) {
@@ -25,8 +26,8 @@ class YouAreHere extends React.Component {
   }
 
   buildMap() {
-    ymaps.ready(() => {
-      var map = new ymaps.Map("YMapsID", {
+    ymaps.load("https://api-maps.yandex.ru/2.1/?lang=ru_RU").then(maps => {
+      var map = new maps.Map("YMapsID", {
         center: this.state.coordinates,
         zoom: 13
       });

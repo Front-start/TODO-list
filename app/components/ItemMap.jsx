@@ -1,4 +1,5 @@
 import React from "react";
+import ymaps from "ymaps";
 
 class ItemMap extends React.Component {
   constructor(props) {
@@ -10,8 +11,8 @@ class ItemMap extends React.Component {
     };
   }
   componentWillMount() {
-    ymaps.ready(() => {
-      var myGeoObjects = new ymaps.GeoObjectCollection(
+    ymaps.load("https://api-maps.yandex.ru/2.1/?lang=ru_RU").then(maps => {
+      var myGeoObjects = new maps.GeoObjectCollection(
         {},
         {
           strokeWidth: 4,
@@ -20,10 +21,10 @@ class ItemMap extends React.Component {
       );
 
       myGeoObjects.add(
-        new ymaps.Polyline([this.state.coordinate1, this.state.coordinate2])
+        new maps.Polyline([this.state.coordinate1, this.state.coordinate2])
       );
 
-      var firstLocation = ymaps
+      var firstLocation = maps
         .geocode(this.state.coordinate1, {
           results: 1
         })
@@ -40,7 +41,7 @@ class ItemMap extends React.Component {
           myGeoObjects.add(firstGeoObject);
         });
 
-      var secondLocation = ymaps
+      var secondLocation = maps
         .geocode(this.state.coordinate2, {
           results: 1
         })
@@ -56,7 +57,7 @@ class ItemMap extends React.Component {
           );
           myGeoObjects.add(secondGeoObject);
 
-          let myMap = new ymaps.Map("item-map", {
+          let myMap = new maps.Map("item-map", {
             center: [1, 2],
             zoom: 5
           });
