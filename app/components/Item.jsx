@@ -2,17 +2,20 @@ import React from "react";
 import { Link, BrowserRouter } from "react-router-dom";
 import { ItemsStorage } from "./storage.js";
 import ItemRender from "./ItemRender.jsx";
+import ItemMap from "./ItemMap.jsx";
 
 class Item extends React.Component {
   constructor(props) {
     super(props);
     this.getItemById = this.getItemById.bind(this);
+    this.updateInfo = this.updateInfo.bind(this);
+    this.getDistance = this.getDistance.bind(this);
 
     this.state = {
       itemId: null,
-      coordinate1: null,
-      coordinate2: null,
-      distance: "Неизвестно"
+      distance: "Неизвестно",
+      coordinates1: null,
+      coordinates2: null
     };
   }
   getItemById(arr, itemId) {
@@ -22,90 +25,35 @@ class Item extends React.Component {
       }
     }
   }
-  componentWillMount() {
-    let id = this.getItemById(ItemsStorage.items, this.props.match.params.id);
-    this.setState({
-      coordinate1: localStorage.getItem("Location").split(","),
-      coordinate2: ItemsStorage.items[id].coordinates,
-      itemId: id
-    });
-  }
-  componentDidMount() {
+  getDistance() {
     ymaps.ready(() => {
       this.setState({
         distance: Math.floor(
           ymaps.coordSystem.geo.getDistance(
-            this.state.coordinate1,
-            this.state.coordinate2
+            this.state.coordinates1,
+            this.state.coordinates2
           ) / 1000
         )
       });
-
-      var myGeoObjects = new ymaps.GeoObjectCollection(
-        {},
-        {
-          strokeWidth: 4,
-          geodesic: true
-        }
-      );
-
-      let myMap = new ymaps.Map("item-map", {
-        center: [1, 2],
-        zoom: 5
-      });
-
-      myGeoObjects.add(
-        new ymaps.Polyline([this.state.coordinate1, this.state.coordinate2])
-      );
-
-      var firstLocation = ymaps
-        .geocode(this.state.coordinate1, {
-          results: 1
-        })
-        .then(function(res) {
-          let firstGeoObject = res.geoObjects.get(0),
-            coords = firstGeoObject.geometry.getCoordinates(),
-            bounds = firstGeoObject.properties.get("boundedBy");
-
-          firstGeoObject.options.set(
-            "preset",
-            "islands#darkBlueDotIconWithCaption"
-          );
-          firstGeoObject.properties.set(
-            "iconCaption",
-            firstGeoObject.getAddressLine()
-          );
-          myGeoObjects.add(firstGeoObject);
-        });
-
-      var secondLocation = ymaps
-        .geocode(this.state.coordinate2, {
-          results: 1
-        })
-        .then(function(res) {
-          let secondGeoObject = res.geoObjects.get(0),
-            coords = secondGeoObject.geometry.getCoordinates(),
-            bounds = secondGeoObject.properties.get("boundedBy");
-
-          secondGeoObject.options.set(
-            "preset",
-            "islands#darkBlueDotIconWithCaption"
-          );
-          secondGeoObject.properties.set(
-            "iconCaption",
-            secondGeoObject.getAddressLine()
-          );
-
-          myGeoObjects.add(secondGeoObject);
-          myMap.geoObjects.add(myGeoObjects);
-
-          myMap.setBounds(myGeoObjects.getBounds(), {
-            checkZoomRange: true,
-            zoomMargin: 30
-          });
-        });
     });
   }
+
+  updateInfo() {
+    if (localStorage.getItem("Location")) {
+      let id = this.getItemById(ItemsStorage.items, this.props.match.params.id);
+      this.setState({
+        coordinates1: JSON.parse(localStorage.getItem("Location")).coordinates,
+        coordinates2: ItemsStorage.items[id].coordinates,
+        itemId: id
+      });
+      this.getDistance();
+    } else setTimeout(this.updateInfo, 100);
+  }
+
+  componentWillMount() {
+    this.updateInfo();
+  }
+
   render() {
     if (this.state.itemId == undefined) {
       return (
@@ -127,7 +75,7 @@ class Item extends React.Component {
           />
           <Link to={`/`}>Вернуться к списку</Link>
           <p>Таск находится здесь:</p>
-          <div id="item-map" style={{ width: "500px", height: "400px" }} />
+          <ItemMap c1={this.state.coordinates1} c2={this.state.coordinates2} />
         </div>
       );
     }

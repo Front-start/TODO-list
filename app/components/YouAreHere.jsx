@@ -3,12 +3,31 @@ import React from "react";
 class YouAreHere extends React.Component {
   constructor(props) {
     super(props);
+    this.updateInfo = this.updateInfo.bind(this);
+    this.buildMap = this.buildMap.bind(this);
+
+    this.state = {
+      coordinates: null
+    };
   }
 
-  componentWillMount() {
+  updateInfo() {
+    if (localStorage.getItem("Location")) {
+      this.setState({
+        coordinates: JSON.parse(localStorage.getItem("Location")).coordinates
+      });
+      this.buildMap();
+    } else setTimeout(this.updateInfo, 100);
+  }
+
+  componentDidMount() {
+    this.updateInfo();
+  }
+
+  buildMap() {
     ymaps.ready(() => {
       var map = new ymaps.Map("YMapsID", {
-        center: JSON.parse(localStorage.getItem("Location")).coordinates,
+        center: this.state.coordinates,
         zoom: 13
       });
 

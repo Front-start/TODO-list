@@ -6,10 +6,25 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
 
+    this.updateInfo = this.updateInfo.bind(this);
+
     this.state = {
-      PreviousSessionTime: localStorage.getItem("PreviousSessionTime"),
-      Location: JSON.parse(localStorage.getItem("Location")).name
+      PreviousSessionTime: "Вы зашли впервые!",
+      Location: "Не удалось определить :("
     };
+  }
+
+  updateInfo() {
+    if (localStorage.getItem("Location")) {
+      this.setState({
+        PreviousSessionTime: localStorage.getItem("PreviousSessionTime"),
+        Location: JSON.parse(localStorage.getItem("Location")).name
+      });
+    } else setTimeout(this.updateInfo, 100);
+  }
+
+  componentDidMount() {
+    this.updateInfo();
   }
 
   render() {
