@@ -8,7 +8,7 @@ class Header extends React.Component {
 
     this.state = {
       PreviousSessionTime: localStorage.getItem("PreviousSessionTime"),
-      Location: localStorage.getItem("Location").name
+      Location: JSON.parse(localStorage.getItem("Location")).name
     };
   }
 

@@ -1,6 +1,8 @@
 import ReactDOM from "react-dom";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import moment from "moment";
+moment.locale("ru");
 
 import Header from "./components/Header.jsx";
 import Nav from "./components/Nav.jsx";
@@ -19,6 +21,8 @@ ymaps.ready(() => {
     localStorage.setItem("Location", JSON.stringify(location));
   });
 });
+
+localStorage.setItem("PreviousSessionTime", moment().toISOString());
 
 ReactDOM.render(
   <Router>
