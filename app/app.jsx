@@ -10,6 +10,16 @@ import NotFound from "./components/NotFound.jsx";
 
 import style from "./styles/style.less";
 
+ymaps.ready(() => {
+  ymaps.geolocation.get().then(result => {
+    let location = {
+      coordinates: result.geoObjects.get(0).geometry.getCoordinates(),
+      name: result.geoObjects.get(0).properties.get("text")
+    };
+    localStorage.setItem("Location", JSON.stringify(location));
+  });
+});
+
 ReactDOM.render(
   <Router>
     <div>

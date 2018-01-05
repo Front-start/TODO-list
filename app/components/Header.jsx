@@ -8,23 +8,8 @@ class Header extends React.Component {
 
     this.state = {
       PreviousSessionTime: localStorage.getItem("PreviousSessionTime"),
-      Location: "Неизвестно"
+      Location: localStorage.getItem("Location").name
     };
-  }
-
-  componentWillMount() {
-    localStorage.setItem("PreviousSessionTime", moment().toISOString());
-    ymaps.ready(() => {
-      ymaps.geolocation.get({ mapStateAutoApply: true }).then(result => {
-        localStorage.setItem(
-          "Location",
-          result.geoObjects.get(0).geometry.getCoordinates()
-        );
-        this.setState({
-          Location: result.geoObjects.get(0).properties.get("text")
-        });
-      });
-    });
   }
 
   render() {

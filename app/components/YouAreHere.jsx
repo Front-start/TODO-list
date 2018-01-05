@@ -7,21 +7,14 @@ class YouAreHere extends React.Component {
 
   componentWillMount() {
     ymaps.ready(() => {
-      ymaps.geolocation.get({ mapStateAutoApply: true }).then(result => {
-        var $container = $("YMapsID"),
-          bounds = result.geoObjects.get(0).properties.get("boundedBy"),
-          mapState = ymaps.util.bounds.getCenterAndZoom(bounds, [
-            $container.width(),
-            $container.height()
-          ]);
+      var map = new ymaps.Map("YMapsID", {
+        center: JSON.parse(localStorage.getItem("Location")).coordinates,
+        zoom: 13
+      });
 
-        mapState.zoom = 12;
-        var map = new ymaps.Map("YMapsID", mapState);
-
-        map.balloon.open(map.getCenter(), {
-          contentHeader: "Вы здесь",
-          contentBody: "Но это не точно"
-        });
+      map.balloon.open(map.getCenter(), {
+        contentHeader: "Вы здесь",
+        contentBody: "Но это не точно"
       });
     });
   }
