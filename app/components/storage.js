@@ -1,6 +1,7 @@
 export let ItemsStorage = {
   fields: {
     id: { type: "number", name: "№" },
+    location: { type: "string", name: "Местоположение" },
     name: { type: "string", name: "Заголовок" },
     date: { type: "date", name: "Дата добавления" },
     date2: { type: "date", name: "Дедлайн" },
@@ -10,6 +11,8 @@ export let ItemsStorage = {
     {
       id: 1,
       state: 60,
+      location: "Россия, Смоленская область, Кардымовский район",
+      coordinates: [54.874604, 32.510532],
       name: "[HMR] Cannot apply update. Need to do a full reload!",
       date: "2017-12-31T07:16:30.000Z",
       date2: "2017-12-27T14:23:10.000Z",
@@ -18,7 +21,9 @@ export let ItemsStorage = {
     },
     {
       id: 25,
+      location: "Россия, Владимирская область, Петушинский район",
       state: 80,
+      coordinates: [55.874604, 39.510532],
       name: "Табурет-стремянка М91.13",
       date: "2017-11-26T13:56:30.000Z",
       date2: "2017-12-17T04:23:10.000Z",
@@ -27,7 +32,10 @@ export let ItemsStorage = {
     },
     {
       id: 2,
+      location:
+        "Россия, Рязанская область, Окский государственный природный биосферный заповедник",
       state: 50,
+      coordinates: [54.874604, 40.510532],
       name: "[WDS] Disconnected!",
       date: "2017-12-31T07:21:30.000Z",
       date2: "2018-01-23T10:54:50.000Z",
@@ -36,7 +44,9 @@ export let ItemsStorage = {
     },
     {
       id: 3,
+      location: "Россия, Калужская область, Ульяновский район",
       state: 10,
+      coordinates: [53.874604, 35.510532],
       name:
         "Здесь определен компонент ClickButton, который по сути представляет кнопку",
       date: "2017-12-31T07:49:50.000Z",
@@ -46,7 +56,9 @@ export let ItemsStorage = {
     },
     {
       id: 4,
+      location: "Россия, Московская область, Ногинский район",
       state: 70,
+      coordinates: [55.874604, 38.510532],
       name:
         "Для начала, давайте рассмотрим, как преобразовать списки в JavaScript",
       date: "2017-12-31T10:03:10.000Z",
@@ -56,7 +68,9 @@ export let ItemsStorage = {
     },
     {
       id: 5,
+      location: "Польша, Воевудзтво-Свентокшиске",
       state: 100,
+      coordinates: [50.874604, 20.510532],
       name: "Запотеть катку",
       date: "2017-12-31T06:59:50.000Z",
       date2: "2017-12-31T18:06:30.000Z",
@@ -68,4 +82,5 @@ export let ItemsStorage = {
 
 ItemsStorage.items.forEach(function(item) {
   Object.defineProperty(item, "state", { enumerable: false });
+  Object.defineProperty(item, "coordinates", { enumerable: false });
 });

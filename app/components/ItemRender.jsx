@@ -19,12 +19,17 @@ class ItemRender extends React.Component {
     return (
       <div key={this.props.item.id} className="itemSingle">
         <div>
-          {"Готовность: "}
-          <span style={{ color: this.state.color }}>
-            {this.props.item.state}%
-          </span>
+          <p>
+            {"Готовность: "}
+            <span style={{ color: this.state.color }}>
+              {this.props.item.state}%
+            </span>
+          </p>
+          <p>
+            {"Дедлайн: "}
+            {moment().to(this.props.item.date2)}
+          </p>
         </div>
-        <div>Дедлайн: {moment().to(this.props.item.date2)}</div>
         <ul>
           {Object.keys(this.props.item).map(key => (
             <li key={key}>
