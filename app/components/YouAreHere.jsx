@@ -26,21 +26,23 @@ class YouAreHere extends React.Component {
   }
 
   buildMap() {
-    ymaps.load("https://api-maps.yandex.ru/2.1/?lang=ru_RU").then(maps => {
-      var map = new maps.Map("YMapsID", {
-        center: this.state.coordinates,
-        zoom: 13
-      });
+    ymaps
+      .load("https://api-maps.yandex.ru/2.1/?lang=ru_RU&width=100%&height=100%")
+      .then(maps => {
+        var map = new maps.Map("YMapsID", {
+          center: this.state.coordinates,
+          zoom: 13
+        });
 
-      map.balloon.open(map.getCenter(), {
-        contentHeader: "Вы здесь",
-        contentBody: "Но это не точно"
+        map.balloon.open(map.getCenter(), {
+          contentHeader: "Вы здесь",
+          contentBody: "Но это не точно"
+        });
       });
-    });
   }
 
   render() {
-    return <div id="YMapsID" style={{ width: "500px", height: "400px" }} />;
+    return <div id="YMapsID" />;
   }
 }
 
