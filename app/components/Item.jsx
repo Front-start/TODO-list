@@ -10,7 +10,6 @@ class Item extends React.Component {
     super(props);
     this.getItemById = this.getItemById.bind(this);
     this.updateInfo = this.updateInfo.bind(this);
-    this.getDistance = this.getDistance.bind(this);
 
     this.state = {
       itemId: null,
@@ -21,42 +20,43 @@ class Item extends React.Component {
   }
   getItemById(arr, itemId) {
     for (let i = 0; i < arr.length; i++) {
-      if (arr[i].id === +itemId) {
+      if (arr[i].id == +itemId) {
         return i;
       }
     }
   }
-  getDistance() {
-    ymaps.load("https://api-maps.yandex.ru/2.1/?lang=ru_RU").then(maps => {
-      this.setState({
-        distance: Math.floor(
-          maps.coordSystem.geo.getDistance(
-            this.state.coordinates1,
-            this.state.coordinates2
-          ) / 1000
-        )
-      });
-    });
-  }
 
   updateInfo() {
-    if (localStorage.getItem("Location")) {
-      let id = this.getItemById(ItemsStorage.items, this.props.match.params.id);
+    if (localStorage.getItem("Location") && this.state.itemId) {
       this.setState({
         coordinates1: JSON.parse(localStorage.getItem("Location")).coordinates,
-        coordinates2: ItemsStorage.items[id].coordinates,
-        itemId: id
+        coordinates2: ItemsStorage.items[this.state.itemId].coordinates
       });
-      this.getDistance();
+      ymaps.load("https://api-maps.yandex.ru/2.1/?lang=ru_RU").then(maps => {
+        this.setState({
+          distance: Math.floor(
+            maps.coordSystem.geo.getDistance(
+              this.state.coordinates1,
+              this.state.coordinates2
+            ) / 1000
+          )
+        });
+      });
     } else setTimeout(this.updateInfo, 100);
   }
 
   componentWillMount() {
-    this.updateInfo();
+    let id = this.getItemById(ItemsStorage.items, this.props.match.params.id);
+    if (id) {
+      this.setState({
+        itemId: id
+      });
+      this.updateInfo();
+    }
   }
 
   render() {
-    if (this.state.itemId == undefined) {
+    if (this.state.itemId == undefined && this.state.coordinates1 == null) {
       return (
         <div>
           <h2>Нет такой записи</h2>
