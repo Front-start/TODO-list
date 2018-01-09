@@ -197,6 +197,7 @@ module.exports = {
         "text-shadow"
       ],
       "unspecified-properties-position": "bottom"
-    })
+    }),
+    require("lost")
   ]
 };
