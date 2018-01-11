@@ -46,7 +46,7 @@ class Item extends React.Component {
   }
 
   componentWillMount() {
-    let id = this.getItemById(ItemsStorage.items, this.props.match.params.id);
+    let id = this.getItemById(ItemsStorage.items, +this.props.match.params.id);
     if (id) {
       this.setState({
         itemId: id

@@ -193,6 +193,10 @@ header .info:nth-child(2n) {
   margin-left: auto;
 }
 
+#item-map {
+  height: 400px;
+}
+
 .highlightedItem {
   background-color: palegoldenrod;
 }
