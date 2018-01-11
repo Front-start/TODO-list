@@ -22,7 +22,6 @@ class ItemList extends React.Component {
   }
 
   toggleHighlight(x) {
-    console.log("mouse");
     this.state.highlightedItemId == x
       ? this.setState({ highlightedItemId: null })
       : this.setState({ highlightedItemId: x });
@@ -71,6 +70,7 @@ class ItemList extends React.Component {
           ref="order"
           onClick={this.updateSortingOrder}
         />
+        <input type="button" value="Отсортировать" onClick={this.sort} />
         <YouAreHere items={this.state.items} highlight={this.toggleHighlight} />
         <section className="item-list">
           {this.state.items.map(item => (
@@ -84,7 +84,6 @@ class ItemList extends React.Component {
             </div>
           ))}
         </section>
-        <input type="button" value="Отсортировать" onClick={this.sort} />
       </div>
     );
   }

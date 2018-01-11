@@ -201,6 +201,16 @@ header .info:nth-child(2n) {
   background-color: palegoldenrod;
 }
 
+input,
+select {
+  margin: 5px;
+  background: aquamarine;
+}
+
+input[type="button"] {
+  padding: 5px;
+}
+
 @media only screen and (max-device-width: 500px) {
   header .info {
     display: none;

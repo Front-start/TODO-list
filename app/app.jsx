@@ -27,7 +27,7 @@ localStorage.setItem("PreviousSessionTime", moment().toISOString());
 
 ReactDOM.render(
   <Router>
-    <div>
+    <div className="wrapper">
       <Header />
       <Nav />
       <Switch>
