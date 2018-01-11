@@ -27,7 +27,7 @@ class Item extends React.Component {
   }
 
   updateInfo() {
-    if (localStorage.getItem("Location") && this.state.itemId) {
+    if (localStorage.getItem("Location") && this.state.itemId != null) {
       this.setState({
         coordinates1: JSON.parse(localStorage.getItem("Location")).coordinates,
         coordinates2: ItemsStorage.items[this.state.itemId].coordinates
@@ -46,8 +46,8 @@ class Item extends React.Component {
   }
 
   componentWillMount() {
-    let id = this.getItemById(ItemsStorage.items, +this.props.match.params.id);
-    if (id) {
+    let id = this.getItemById(ItemsStorage.items, this.props.match.params.id);
+    if (id != undefined) {
       this.setState({
         itemId: id
       });
