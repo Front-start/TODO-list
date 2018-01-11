@@ -3,6 +3,7 @@ import { Link, BrowserRouter } from "react-router-dom";
 import { ItemsStorage } from "./storage.js";
 import { SortArray } from "./SortArray.js";
 import ItemRender from "./ItemRender.jsx";
+import YouAreHere from "./YouAreHere.jsx";
 
 class ItemList extends React.Component {
   constructor(props) {
@@ -10,12 +11,21 @@ class ItemList extends React.Component {
     this.sort = this.sort.bind(this);
     this.updateSortingField = this.updateSortingField.bind(this);
     this.updateSortingOrder = this.updateSortingOrder.bind(this);
+    this.toggleHighlight = this.toggleHighlight.bind(this);
 
     this.state = {
       items: ItemsStorage.items,
       order: "desc",
-      fieldToSort: "id"
+      fieldToSort: "id",
+      highlightedItemId: null
     };
+  }
+
+  toggleHighlight(x) {
+    console.log("mouse");
+    this.state.highlightedItemId == x
+      ? this.setState({ highlightedItemId: null })
+      : this.setState({ highlightedItemId: x });
   }
 
   componentWillMount() {
@@ -42,9 +52,9 @@ class ItemList extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="item-list-wrapper">
         <div>
-          <h1 style={{ color: "red" }}>ItemList</h1>
+          <h1>ItemList</h1>
         </div>
         <select onChange={this.updateSortingField}>
           {Object.keys(ItemsStorage.fields).map(function(key) {
@@ -61,14 +71,19 @@ class ItemList extends React.Component {
           ref="order"
           onClick={this.updateSortingOrder}
         />
-        <div className="item-list">
+        <YouAreHere items={this.state.items} highlight={this.toggleHighlight} />
+        <section className="item-list">
           {this.state.items.map(item => (
             <div key={item.id} className="item">
-              <ItemRender item={item} fields={ItemsStorage.fields} />
+              <ItemRender
+                item={item}
+                highlightedItemId={this.state.highlightedItemId}
+                fields={ItemsStorage.fields}
+              />
               <Link to={`/item/${item.id}`}>Открыть запись</Link>
             </div>
           ))}
-        </div>
+        </section>
         <input type="button" value="Отсортировать" onClick={this.sort} />
       </div>
     );

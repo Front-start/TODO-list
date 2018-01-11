@@ -1,28 +1,56 @@
-div {
+@lost flexbox flex;
+
+*,
+*:after,
+*:before {
   box-sizing: border-box;
-  display: inline-block;
+  border: 0;
+  margin: 0;
+  padding: 0;
 }
-.item {
-  display: inline-block;
-  width: 50%;
-  border: 1px seagreen solid;
+
+#app {
+  lost-center: 1024px;
+  lost-utility: clearfix;
+}
+
+header,
+nav,
+footer,
+.main,
+.wrapper,
+.item-list-wrapper {
+  lost-utility: clearfix;
+  lost-column: 1;
 }
 
 header {
-  height: 100px;
+  lost-flex-container: row;
   background-color: coral;
-  lost-column: 1;
+  .title {
+    lost-column: 1/2 2;
+  }
+  .info {
+    lost-column: 1/2 2;
+    float: right;
+    text-align: right;
+    @media only screen and (max-device-width: 500px) {
+      display: none;
+    }
+  }
 }
-.header2 {
-  width: 100%;
+.item-list {
+  lost-flex-container: row;
 }
-nav {
-  float: left;
+.item {
+  lost-column: 1/2 2;
+  border: 1px seagreen solid;
 }
 
 #YMapsID {
-  float: right;
-  lost-align: center;
-  width: 100%;
-  height: 300px;
+  lost-column: 1;
+  height: 400px;
+}
+.highlightedItem {
+  background-color: palegoldenrod;
 }

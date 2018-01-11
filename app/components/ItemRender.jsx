@@ -15,9 +15,16 @@ class ItemRender extends React.Component {
     let hue = (value / 100 * 120).toString(10);
     return ["hsl(", hue, ",100%,50%)"].join("");
   }
+
+  componentWillReceiveProps(nextProps) {
+    this.props.item.id == nextProps.highlightedItemId
+      ? this.setState({ classes: "highlightedItem" })
+      : this.setState({ classes: "" });
+  }
+
   render() {
     return (
-      <div key={this.props.item.id} className="itemSingle">
+      <div key={this.props.item.id} className={this.state.classes}>
         <div>
           <p>
             {"Готовность: "}

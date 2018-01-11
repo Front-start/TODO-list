@@ -30,10 +30,10 @@ class Header extends React.Component {
   render() {
     return (
       <header>
-        <div style={{ float: "left" }}>
+        <div className="title">
           <h1>Super_*TODO_list*_V.i.P</h1>
         </div>
-        <div style={{ float: "right" }}>
+        <div className="info">
           <p>
             {"Предыдущее посещение: "}
             {this.state.PreviousSessionTime

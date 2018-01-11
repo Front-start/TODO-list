@@ -8,7 +8,7 @@ class YouAreHere extends React.Component {
     this.buildMap = this.buildMap.bind(this);
 
     this.state = {
-      coordinates: null
+      items: this.props.items
     };
   }
 
@@ -27,16 +27,55 @@ class YouAreHere extends React.Component {
 
   buildMap() {
     ymaps
-      .load("https://api-maps.yandex.ru/2.1/?lang=ru_RU&width=100%&height=100%")
+      .load("https://api-maps.yandex.ru/2.1/?lang=ru_RU&load=package.standard")
       .then(maps => {
+        var myCollection = new maps.GeoObjectCollection();
+
         var map = new maps.Map("YMapsID", {
-          center: this.state.coordinates,
-          zoom: 13
+          center: [1, 2],
+          zoom: 3
         });
 
-        map.balloon.open(map.getCenter(), {
-          contentHeader: "Вы здесь",
-          contentBody: "Но это не точно"
+        let location = maps
+          .geocode(this.state.coordinates, {
+            results: 1
+          })
+          .then(res => {
+            let geoObj = res.geoObjects.get(0);
+            geoObj.options.set("preset", "islands#redDotIcon");
+            geoObj.properties.set(
+              "iconCaption",
+              "Вы здесь - " + geoObj.getAddressLine() + "/r/n asd"
+            );
+            map.geoObjects.add(geoObj);
+            map.setBounds(map.geoObjects.getBounds(), {
+              checkZoomRange: true,
+              zoomMargin: 30
+            });
+          });
+
+        this.state.items.map(item => {
+          let location = maps
+            .geocode(item.coordinates, {
+              results: 1
+            })
+            .then(res => {
+              let geoObj = res.geoObjects.get(0);
+              geoObj.options.set("preset", "islands#violetDotIcon");
+              geoObj.properties.set("iconCaption", geoObj.getAddressLine());
+              geoObj.events.add("mouseenter", e => {
+                this.props.highlight(e.get("target").properties.get("id"));
+              });
+              geoObj.events.add("mouseleave", e => {
+                this.props.highlight(e.get("target").properties.get("id"));
+              });
+              geoObj.properties.set("id", item.id);
+              map.geoObjects.add(geoObj);
+              map.setBounds(map.geoObjects.getBounds(), {
+                checkZoomRange: true,
+                zoomMargin: 30
+              });
+            });
         });
       });
   }
