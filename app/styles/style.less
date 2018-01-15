@@ -1,8 +1,8 @@
 @lost flexbox flex;
 
 *,
-*:after,
-*:before {
+*::after,
+*::before {
   box-sizing: border-box;
   border: 0;
   margin: 0;
@@ -27,23 +27,28 @@ footer,
 header {
   lost-flex-container: row;
   background-color: coral;
+
   .title {
-    lost-column: 1/2 2;
+    lost-column: 1 / 2 2;
   }
+
   .info {
-    lost-column: 1/2 2;
+    lost-column: 1 / 2 2;
     float: right;
     text-align: right;
+
     @media only screen and (max-device-width: 500px) {
       display: none;
     }
   }
 }
+
 .item-list {
   lost-flex-container: row;
 }
+
 .item {
-  lost-column: 1/2 2;
+  lost-column: 1 / 2 2;
   border: 1px seagreen solid;
 }
 
@@ -51,17 +56,21 @@ header {
   lost-column: 1;
   height: 400px;
 }
+
 #item-map {
   height: 400px;
 }
+
 .highlightedItem {
   background-color: palegoldenrod;
 }
+
 input,
 select {
   margin: 5px;
   background: aquamarine;
 }
+
 input[type="button"] {
   padding: 5px;
 }
