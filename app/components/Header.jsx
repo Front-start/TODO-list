@@ -25,6 +25,7 @@ class Header extends React.Component {
 
   componentDidMount() {
     this.updateInfo();
+    localStorage.setItem("PreviousSessionTime", moment().toISOString());
   }
 
   render() {

@@ -23,8 +23,6 @@ ymaps.load("https://api-maps.yandex.ru/2.1/?lang=ru_RU").then(maps => {
   });
 });
 
-localStorage.setItem("PreviousSessionTime", moment().toISOString());
-
 ReactDOM.render(
   <Router>
     <div className="wrapper">
