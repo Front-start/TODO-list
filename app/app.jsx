@@ -10,6 +10,7 @@ import Nav from "./components/Nav.jsx";
 import Main from "./components/Main.jsx";
 import Item from "./components/Item.jsx";
 import NotFound from "./components/NotFound.jsx";
+import { ItemsStorage } from "./components/storage.js";
 
 var redux = require("redux");
 var Provider = require("react-redux").Provider;
@@ -20,14 +21,7 @@ var store = redux.createStore(reducer);
 
 store.dispatch({
   type: "SET_STATE",
-  state: {
-    phones: ["iPhone 7 Plus", "Samsung Galaxy A5"]
-  }
-});
-
-store.dispatch({
-  type: "ADD_PHONE",
-  phone: "iPhone 7123 Plus"
+  state: ItemsStorage
 });
 
 import style from "./styles/style.less";

@@ -5,20 +5,19 @@ var actions = require("./actions.jsx");
 class PhoneForm extends React.Component {
   constructor(props) {
     super(props);
-    this.onClick = this.onClick.bind(this);
   }
   onClick() {
     if (this.refs.phoneInput.value !== "") {
       var itemText = this.refs.phoneInput.value;
       this.refs.phoneInput.value = "";
-      return this.props.addPhone(itemText);
+      return this.props.addItem({ id: itemText });
     }
   }
   render() {
     return (
       <div>
         <input ref="phoneInput" />
-        <button onClick={this.onClick}>Добавить</button>
+        <button onClick={this.onClick.bind(this)}>Добавить</button>
       </div>
     );
   }
@@ -34,7 +33,7 @@ class PhoneItem extends React.Component {
         <p>
           <b>{this.props.text}</b>
           <br />
-          <button onClick={() => this.props.deletePhone(this.props.text)}>
+          <button onClick={() => this.props.deleteItem(this.props.text)}>
             Удалить
           </button>
         </p>
@@ -50,13 +49,16 @@ class PhonesList extends React.Component {
   render() {
     return (
       <div>
-        {this.props.phones.map(item => (
-          <PhoneItem
-            key={item}
-            text={item}
-            deletePhone={this.props.deletePhone}
-          />
-        ))}
+        {this.props.items.map(item => {
+          console.log(item);
+          return (
+            <PhoneItem
+              key={item.get("id")}
+              text={item.get("id")}
+              deleteItem={this.props.deleteItem}
+            />
+          );
+        })}
       </div>
     );
   }
@@ -66,8 +68,8 @@ class AppView extends React.Component {
   render() {
     return (
       <div>
-        <PhoneForm addPhone={this.props.addPhone} />
-        <PhonesList phones={this.props.phones} />
+        <PhoneForm addItem={this.props.addItem} />
+        <PhonesList {...this.props} />
       </div>
     );
   }
@@ -75,7 +77,7 @@ class AppView extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    phones: state.get("phones")
+    items: state.get("items")
   };
 }
 

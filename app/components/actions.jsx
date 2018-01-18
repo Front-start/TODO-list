@@ -1,14 +1,14 @@
-var addPhone = function(phone) {
+var addItem = function(item) {
   return {
-    type: "ADD_PHONE",
-    phone
+    type: "ADD_ITEM",
+    item
   };
 };
-var deletePhone = function(phone) {
+var deleteItem = function(item) {
   return {
-    type: "DELETE_PHONE",
-    phone
+    type: "DELETE_ITEM",
+    item
   };
 };
 
-module.exports = { addPhone, deletePhone };
+module.exports = { addItem, deleteItem };
