@@ -11,6 +11,25 @@ import Main from "./components/Main.jsx";
 import Item from "./components/Item.jsx";
 import NotFound from "./components/NotFound.jsx";
 
+var redux = require("redux");
+var Provider = require("react-redux").Provider;
+var reducer = require("./components/reducer.jsx");
+var AppView = require("./components/AppView.jsx");
+
+var store = redux.createStore(reducer);
+
+store.dispatch({
+  type: "SET_STATE",
+  state: {
+    phones: ["iPhone 7 Plus", "Samsung Galaxy A5"]
+  }
+});
+
+store.dispatch({
+  type: "ADD_PHONE",
+  phone: "iPhone 7123 Plus"
+});
+
 import style from "./styles/style.less";
 
 ymaps.load("https://api-maps.yandex.ru/2.1/?lang=ru_RU").then(maps => {
@@ -24,16 +43,19 @@ ymaps.load("https://api-maps.yandex.ru/2.1/?lang=ru_RU").then(maps => {
 });
 
 ReactDOM.render(
-  <Router>
-    <div className="wrapper">
-      <Header />
-      <Nav />
-      <Switch>
-        <Route exact path="/" component={Main} />
-        <Route path="/item/:id" component={Item} />
-        <Route component={NotFound} />
-      </Switch>
-    </div>
-  </Router>,
+  <Provider store={store}>
+    <Router>
+      <div className="wrapper">
+        <Header />
+        <Nav />
+        <Switch>
+          <Route exact path="/" component={Main} />
+          <Route path="/item/:id" component={Item} />
+          <Route path="/redux" component={AppView} />
+          <Route component={NotFound} />
+        </Switch>
+      </div>
+    </Router>
+  </Provider>,
   document.getElementById("app")
 );

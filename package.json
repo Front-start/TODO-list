@@ -10,8 +10,11 @@
   "dependencies": {
     "moment": "^2.20.1",
     "react": "^16.0.0",
+    "immutable": "^3.8.2",
     "react-dom": "^16.0.0",
-    "react-router-dom": "^4.2.1"
+    "react-router-dom": "^4.2.1",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.3",
@@ -42,13 +45,7 @@
     "ymaps": "^0.1.1"
   },
   "stylelint": {
-    "extends": [
-      "stylelint-config-lost"
-    ]
+    "extends": ["stylelint-config-lost"]
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "IE 10"
-  ]
+  "browserslist": ["> 1%", "last 2 versions", "IE 10"]
 }
