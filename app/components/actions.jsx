@@ -4,11 +4,19 @@ var addItem = function(item) {
     item
   };
 };
-var deleteItem = function(item) {
+var sortItems = function(field, order, field_type) {
+  return {
+    type: "SORT",
+    field,
+    order,
+    field_type
+  };
+};
+var deleteItem = function(item_id) {
   return {
     type: "DELETE_ITEM",
-    item
+    item_id
   };
 };
 
-module.exports = { addItem, deleteItem };
+module.exports = { addItem, deleteItem, sortItems };

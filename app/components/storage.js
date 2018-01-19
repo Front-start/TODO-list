@@ -79,8 +79,3 @@ export let ItemsStorage = {
     }
   ]
 };
-
-ItemsStorage.items.forEach(function(item) {
-  Object.defineProperty(item, "state", { enumerable: false });
-  Object.defineProperty(item, "coordinates", { enumerable: false });
-});

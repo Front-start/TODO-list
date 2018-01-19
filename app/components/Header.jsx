@@ -6,7 +6,7 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
 
-    this.updateInfo = this.updateInfo.bind(this);
+    this.updateLocation = this.updateLocation.bind(this);
 
     this.state = {
       PreviousSessionTime: null,
@@ -14,17 +14,19 @@ class Header extends React.Component {
     };
   }
 
-  updateInfo() {
+  updateLocation() {
     if (localStorage.getItem("Location")) {
       this.setState({
-        PreviousSessionTime: localStorage.getItem("PreviousSessionTime"),
         Location: JSON.parse(localStorage.getItem("Location")).name
       });
-    } else setTimeout(this.updateInfo, 100);
+    } else setTimeout(this.updateLocation, 100);
   }
 
   componentDidMount() {
-    this.updateInfo();
+    this.setState({
+      PreviousSessionTime: localStorage.getItem("PreviousSessionTime")
+    });
+    this.updateLocation();
     localStorage.setItem("PreviousSessionTime", moment().toISOString());
   }
 

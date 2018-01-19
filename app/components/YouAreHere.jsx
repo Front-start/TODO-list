@@ -1,5 +1,7 @@
 import React from "react";
 import ymaps from "ymaps";
+import { connect } from "react-redux";
+import { actions } from "./actions.jsx";
 
 class YouAreHere extends React.Component {
   constructor(props) {
@@ -85,4 +87,16 @@ class YouAreHere extends React.Component {
   }
 }
 
-module.exports = YouAreHere;
+function mapStateToProps(state) {
+  let obj = state
+    .get("items")
+    .map(item =>
+      item.filter((item, key) => (key == "id" || "coordinates" ? true : false))
+    );
+
+  return {
+    items: obj.toJS()
+  };
+}
+
+module.exports = connect(mapStateToProps, actions)(YouAreHere);

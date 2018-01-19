@@ -7,15 +7,14 @@ import ymaps from "ymaps";
 
 import Header from "./components/Header.jsx";
 import Nav from "./components/Nav.jsx";
-import Main from "./components/Main.jsx";
+import ItemList from "./components/ItemList.jsx";
 import Item from "./components/Item.jsx";
 import NotFound from "./components/NotFound.jsx";
 import { ItemsStorage } from "./components/storage.js";
 
 var redux = require("redux");
-var Provider = require("react-redux").Provider;
-var reducer = require("./components/reducer.jsx");
-var AppView = require("./components/AppView.jsx");
+import { Provider } from "react-redux";
+import reducer from "./components/reducer.jsx";
 
 var store = redux.createStore(reducer);
 
@@ -43,9 +42,8 @@ ReactDOM.render(
         <Header />
         <Nav />
         <Switch>
-          <Route exact path="/" component={Main} />
+          <Route exact path="/" component={ItemList} />
           <Route path="/item/:id" component={Item} />
-          <Route path="/redux" component={AppView} />
           <Route component={NotFound} />
         </Switch>
       </div>

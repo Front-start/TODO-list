@@ -1,9 +1,11 @@
 import React from "react";
 import { Link, BrowserRouter } from "react-router-dom";
-import { ItemsStorage } from "./storage.js";
 import ItemRender from "./ItemRender.jsx";
 import ItemMap from "./ItemMap.jsx";
 import ymaps from "ymaps";
+
+import { connect } from "react-redux";
+import actions from "./actions.jsx";
 
 class Item extends React.Component {
   constructor(props) {
@@ -30,7 +32,7 @@ class Item extends React.Component {
     if (localStorage.getItem("Location") && this.state.itemId != null) {
       this.setState({
         coordinates1: JSON.parse(localStorage.getItem("Location")).coordinates,
-        coordinates2: ItemsStorage.items[this.state.itemId].coordinates
+        coordinates2: this.props.items[this.state.itemId].coordinates
       });
       ymaps.load("https://api-maps.yandex.ru/2.1/?lang=ru_RU").then(maps => {
         this.setState({
@@ -46,7 +48,7 @@ class Item extends React.Component {
   }
 
   componentWillMount() {
-    let id = this.getItemById(ItemsStorage.items, this.props.match.params.id);
+    let id = this.getItemById(this.props.items, this.props.match.params.id);
     if (id != undefined) {
       this.setState({
         itemId: id
@@ -71,8 +73,8 @@ class Item extends React.Component {
           {this.state.distance}
           {" км"}
           <ItemRender
-            item={ItemsStorage.items[this.state.itemId]}
-            fields={ItemsStorage.fields}
+            item={this.props.items[this.state.itemId]}
+            fields={this.props.fields}
           />
           <Link to={`/`}>Вернуться к списку</Link>
           <p>Таск находится здесь:</p>
@@ -83,4 +85,19 @@ class Item extends React.Component {
   }
 }
 
-module.exports = Item;
+function mapStateToProps(state) {
+  let obj = state.get("items").toJS();
+  let obj2 = state.get("fields").toJS();
+
+  obj.map(item => {
+    Object.defineProperty(item, "state", { enumerable: false });
+    Object.defineProperty(item, "coordinates", { enumerable: false });
+  });
+
+  return {
+    fields: obj2,
+    items: obj
+  };
+}
+
+module.exports = connect(mapStateToProps, actions)(Item);
