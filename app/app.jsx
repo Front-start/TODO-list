@@ -10,6 +10,7 @@ import Nav from "./components/Nav.jsx";
 import ItemList from "./components/ItemList.jsx";
 import Item from "./components/Item.jsx";
 import NotFound from "./components/NotFound.jsx";
+import AddItem from "./components/AddItem.jsx";
 import { ItemsStorage } from "./components/storage.js";
 
 var redux = require("redux");
@@ -43,6 +44,7 @@ ReactDOM.render(
         <Nav />
         <Switch>
           <Route exact path="/" component={ItemList} />
+          <Route path="/additem" component={AddItem} />
           <Route path="/item/:id" component={Item} />
           <Route component={NotFound} />
         </Switch>

@@ -16,7 +16,7 @@ class ItemList extends React.Component {
 
     this.state = {
       order: "asc",
-      fieldToSort: "id",
+      fieldToSort: "name",
       highlightedItemId: null
     };
   }
@@ -70,16 +70,21 @@ class ItemList extends React.Component {
         <input type="button" value="Отсортировать" onClick={this.sort} />
         <YouAreHere highlight={this.toggleHighlight} />
         <section className="item-list">
-          {this.props.items.map(item => (
-            <div key={item.id} className="item">
-              <ItemRender
-                item={item}
-                highlightedItemId={this.state.highlightedItemId}
-                fields={this.props.fields}
-              />
-              <Link to={`/item/${item.id}`}>Открыть запись</Link>
-            </div>
-          ))}
+          {this.props.items.map(item => {
+            let cls =
+              item.id == this.state.highlightedItemId
+                ? "item highlightedItem"
+                : "item";
+            return (
+              <div key={item.id} className={cls}>
+                <ItemRender item={item} fields={this.props.fields} />
+
+                <div className="bot">
+                  <Link to={`/item/${item.id}`}>Открыть запись</Link>
+                </div>
+              </div>
+            );
+          })}
         </section>
       </div>
     );
@@ -94,6 +99,9 @@ function mapStateToProps(state) {
     Object.defineProperty(item, "state", { enumerable: false });
     Object.defineProperty(item, "coordinates", { enumerable: false });
   });
+
+  Object.defineProperty(obj2, "id", { enumerable: false });
+  Object.defineProperty(obj2, "content", { enumerable: false });
 
   return {
     fields: obj2,

@@ -8,6 +8,7 @@ class ItemRender extends React.Component {
     super(props);
 
     this.getColor = this.getColor.bind(this);
+    this.itemToRender = this.itemToRender.bind(this);
 
     this.state = { color: this.getColor(this.props.item.state) };
   }
@@ -16,38 +17,46 @@ class ItemRender extends React.Component {
     return ["hsl(", hue, ",100%,50%)"].join("");
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.props.item.id == nextProps.highlightedItemId
-      ? this.setState({ classes: "highlightedItem" })
-      : this.setState({ classes: "" });
+  itemToRender(obj) {
+    this.name = obj.name;
+    this.date = obj.date;
+    this.date2 = obj.date2;
+    this.location = obj.location;
+    this.content = obj.content;
   }
 
   render() {
+    let tempObj = new this.itemToRender(this.props.item);
     return (
-      <div key={this.props.item.id} className={this.state.classes}>
-        <div>
-          <p>
+      <div key={this.props.item.id}>
+        <div className="head">
+          <div>
             {"Готовность: "}
             <span style={{ color: this.state.color }}>
               {this.props.item.state}%
             </span>
-          </p>
-          <p>
+          </div>
+
+          <div>
             {"Дедлайн: "}
             {moment().to(this.props.item.date2)}
-          </p>
+          </div>
         </div>
-        <ul>
-          {Object.keys(this.props.item).map(key => (
-            <li key={key}>
-              {this.props.fields[key].name}
-              {" - "}
-              {this.props.fields[key].type == "date"
-                ? moment(this.props.item[key]).format("DD MMMM YYYY[,] HH:MM")
-                : this.props.item[key]}
-            </li>
+        <div className="table">
+          {Object.keys(tempObj).map(key => (
+            <div className="row" key={key + "_row"}>
+              <div className="cell" key={key}>
+                {this.props.fields[key].name}
+                {":"}
+              </div>
+              <div className="cell" key={key + "_val"}>
+                {this.props.fields[key].type == "date"
+                  ? moment(this.props.item[key]).format("DD MMMM YYYY[,] HH:MM")
+                  : this.props.item[key]}
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     );
   }

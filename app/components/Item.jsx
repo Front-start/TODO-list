@@ -68,16 +68,22 @@ class Item extends React.Component {
       );
     } else {
       return (
-        <div>
-          {"Расстояние до места назначения: "}
-          {this.state.distance}
-          {" км"}
+        <div className="item item-single">
+          <div style={{ padding: "15px" }}>
+            <Link to={`/`}>Вернуться к списку</Link>
+          </div>
+
           <ItemRender
             item={this.props.items[this.state.itemId]}
             fields={this.props.fields}
           />
-          <Link to={`/`}>Вернуться к списку</Link>
-          <p>Таск находится здесь:</p>
+
+          <h2>Таск находится здесь:</h2>
+          <div style={{ padding: "15px" }}>
+            {"Расстояние до места назначения: "}
+            {this.state.distance}
+            {" км"}
+          </div>
           <ItemMap c1={this.state.coordinates1} c2={this.state.coordinates2} />
         </div>
       );

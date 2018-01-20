@@ -1,8 +1,8 @@
 export let ItemsStorage = {
   fields: {
     id: { type: "number", name: "№" },
-    location: { type: "string", name: "Местоположение" },
     name: { type: "string", name: "Заголовок" },
+    location: { type: "string", name: "Местоположение" },
     date: { type: "date", name: "Дата добавления" },
     date2: { type: "date", name: "Дедлайн" },
     content: { type: "string", name: "Задача" }

@@ -6,7 +6,7 @@ class Nav extends React.Component {
     return (
       <nav>
         <Link to="/">Главная</Link>
-        <Link to="/redux">Redux</Link>
+        <Link to="/additem">Добавить запись</Link>
       </nav>
     );
   }

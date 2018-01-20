@@ -6,7 +6,12 @@ var reducer = function(state = Map(), action) {
     case "SET_STATE":
       return state.merge(action.state);
     case "ADD_ITEM":
-      return state.update("items", items => items.push(fromJS(action.item)));
+      action.item.id =
+        state
+          .get("items")
+          .maxBy(item => item.get("id"))
+          .get("id") + 1;
+      return state.update("items", value => value.push(Map(action.item)));
     case "DELETE_ITEM":
       return state.update("items", items =>
         items.filterNot(item => item.get("id") === action.item_id)
