@@ -2,7 +2,7 @@
 
 Ковыряю реакт
 
-Тут должно работать как надо - elite-todolist.surge.sh
+Тут должно работать как надо - [elite-todolist.surge.sh](elite-todolist.surge.sh)
 
 Нет оформления
 
